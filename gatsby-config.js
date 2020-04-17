@@ -1,3 +1,8 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
+const google_private_key = new Buffer(process.env.GOOGLE_AUTH_COVID_19, 'base64').toString('ascii');
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -58,8 +63,7 @@ module.exports = {
         //
         // When you have generated your credentials, it's easiest to refer to them from an environment variable
         // and parse it directly:
-        credentials: process.env.GOOGLE_SERVICE_ACCOUNT_CREDENTIALS,
-        // credentials: require('./client_secret.json'),
+        credentials: JSON.parse(google_private_key),
 
         // Simple node transformation during node sourcing can be achieved by implementing the following functions
         // - `filterNode`
