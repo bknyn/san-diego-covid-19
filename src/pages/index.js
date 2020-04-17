@@ -1,27 +1,37 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
-
-import { graphql } from "gatsby"
 
 export default ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
 
-      {data.allGoogleSpreadsheetRawData.nodes.map( ({ confirmedCases }, index) => (
-        <p key={index}>
-          { confirmedCases }
-        </p>
-      ))}
+      <table>
+        <thead>
+          <tr>
+            <th>Date Reported</th>
+            <th>Confirmed cases</th>
+            <th>Hospitalized</th>
+            <th>ICU</th>
+            <th>Deaths</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.allGoogleSpreadsheetRawData.edges.map( ({ node }, index) => (
+            <tr key={index}>
+              <td>{node.dateReported}</td>
+              <td>{node.confirmedCases}</td>
+              <td>{node.hospitalized}</td>
+              <td>{node.icu}</td>
+              <td>{node.deaths}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-      <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-        <Image />
-      </div>
-      <Link to="/page-2/">Go to page 2</Link>
     </Layout>
   )
 }
@@ -29,9 +39,14 @@ export default ({ data }) => {
 export const query = graphql`
   {
     allGoogleSpreadsheetRawData {
-      nodes {
-        dateReported
-        confirmedCases
+      edges {
+        node {
+          dateReported
+          confirmedCases
+          deaths
+          hospitalized
+          icu
+        }
       }
     }
   }
