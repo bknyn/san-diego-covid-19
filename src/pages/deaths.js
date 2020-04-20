@@ -8,29 +8,30 @@ import ChartBar from '../components/chartBar'
 import ChartCombo from '../components/chartCombo'
 
 export default ({ data }) => {
-  const highestRawData = data.allGoogleSpreadsheetRawData.edges.reduce((max, node) => max.confirmedCases > node.confirmedCases ? max : node)
-  const formattedData = DataFormatter(data.allGoogleSpreadsheetRawData.edges, 'confirmedCases')
+  const highestRawData = data.allGoogleSpreadsheetRawData.edges.reduce((max, node) => max.deaths > node.deaths ? max : node)
+  const formattedData = DataFormatter(data.allGoogleSpreadsheetRawData.edges, 'deaths')
 
   return (
     <Layout>
-      <SEO title="Confirmed Cases" />
+      <SEO title="Deaths" />
 
-      <h1 className="main-content__title main-content__layout--header">Confirmed Cases</h1>
+      <h1 className="main-content__title main-content__layout--header">Deaths</h1>
 
       <div className="main-content__layout--charts">
         <ChartBar
           chartTitle="Daily Total Reported"
-          segment="confirmed-cases"
+          segment="deaths"
           content={formattedData}
-          highValue={highestRawData.node.confirmedCases}
+          highValue={highestRawData.node.deaths}
         />
 
         <ChartCombo
           chartTitle="Daily Change with 5-day Moving Average"
-          segment="confirmed-cases"
+          segment="deaths"
           content={formattedData}
         />
       </div>
+
     </Layout>
   )
 }
@@ -41,7 +42,7 @@ export const query = graphql`
       edges {
         node {
           dateReported(formatString: "MMMM DD, YYYY")
-          confirmedCases
+          deaths
         }
       }
     }

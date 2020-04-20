@@ -1,0 +1,31 @@
+html,
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: $nav-width 1fr;
+  grid-template-rows: $header-height auto;
+  grid-template-areas:
+    "header header"
+    "nav main-content";
+}
+
+.header { grid-area: header; }
+.nav { grid-area: nav; }
+
+.main-content {
+  grid-area: main-content;
+  display: grid;
+  grid-template-columns: 70% 1fr;
+  grid-template-areas:
+    "header header"
+    "charts scorecards";
+}
+
+.main-content__layout--header { grid-area: header; }
+.main-content__layout--charts { grid-area: charts; }
+.main-content__layout--scorecards { grid-area: scorecards; }

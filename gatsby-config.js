@@ -39,6 +39,14 @@ module.exports = {
         filterNode: () => true,
         mapNode: node => node
       }
+    },
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        google: {
+          families: ['Lato:300,400,700']
+        }
+      }
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
