@@ -9,7 +9,7 @@ const NavigationItem = ({content}) => (
         {content.countToday.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
       </span>
       <span className={`nav__item__daily-growth-rate ${content.dailyGrowthRate > 0 ? 'text--bad-direction' : 'text--good-direction'}`} >
-        {`${content.dailyGrowthRate > 0 ? '+' : '-'} ${content.dailyGrowthRate} %`}
+        {`${content.dailyGrowthRate >= 0 ? '+' : '-'} ${content.dailyGrowthRate} %`}
       </span>
     </div>
   </Link>

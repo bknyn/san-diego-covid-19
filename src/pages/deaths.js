@@ -1,20 +1,36 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { DataFormatter } from '../components/helpers'
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import ChartBar from '../components/chartBar'
+import ChartCombo from '../components/chartCombo'
 
 export default ({ data }) => {
+  const highestRawData = data.allGoogleSpreadsheetRawData.edges.reduce((max, node) => max.deaths > node.deaths ? max : node)
+  const formattedData = DataFormatter(data.allGoogleSpreadsheetRawData.edges, 'deaths')
+
   return (
     <Layout>
       <SEO title="Deaths" />
 
-      <h1>Deaths</h1>
-      <h2>deaths 2</h2>
-      <h3>deaths 3</h3>
-      <h4>deaths 4</h4>
-      <h5>deaths 5</h5>
-      <h6>deaths 6</h6>
+      <h1 className="main-content__title main-content__layout--header">Deaths</h1>
+
+      <div className="main-content__layout--charts">
+        <ChartBar
+          chartTitle="Daily Total Reported"
+          segment="deaths"
+          content={formattedData}
+          highValue={highestRawData.node.deaths}
+        />
+
+        <ChartCombo
+          chartTitle="Daily Change with 5-day Moving Average"
+          segment="deaths"
+          content={formattedData}
+        />
+      </div>
 
     </Layout>
   )
@@ -25,7 +41,7 @@ export const query = graphql`
     allGoogleSpreadsheetRawData {
       edges {
         node {
-          dateReported
+          dateReported(formatString: "MMMM DD, YYYY")
           deaths
         }
       }

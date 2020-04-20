@@ -49,7 +49,6 @@ const Navigation = () => {
 
   return (
     <nav className="nav">
-      <Link to="/" className="nav__item">Overview</Link>
       {navArray.map( (navItemContent, index) => (
         <NavigationItem
           key={index}

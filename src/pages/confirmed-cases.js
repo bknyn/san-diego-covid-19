@@ -8,7 +8,6 @@ import ChartBar from '../components/chartBar'
 import ChartCombo from '../components/chartCombo'
 
 export default ({ data }) => {
-
   const highestRawData = data.allGoogleSpreadsheetRawData.edges.reduce((max, node) => max.confirmedCases > node.confirmedCases ? max : node)
   const formattedData = DataFormatter(data.allGoogleSpreadsheetRawData.edges, 'confirmedCases')
 
@@ -41,7 +40,7 @@ export const query = graphql`
     allGoogleSpreadsheetRawData {
       edges {
         node {
-          dateReported(formatString: "MMMM DD, YYYY", locale: "us")
+          dateReported(formatString: "MMMM DD, YYYY")
           confirmedCases
         }
       }
