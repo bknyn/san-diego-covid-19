@@ -1,7 +1,5 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import { PercentDiff } from './helpers.js'
 
 const NavigationItem = ({content}) => (
   <Link to={`/${content.display.toLowerCase().replace(/\s+/g, '-')}`} className="nav__item">

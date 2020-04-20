@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import { PercentDiff } from './helpers.js'
 import NavigationItem from './navigationItem.js'
@@ -22,7 +21,7 @@ const Navigation = () => {
 
   const dataEdges = data.allGoogleSpreadsheetRawData.edges
   const latestNumbers = dataEdges.filter((elem, index, arr) => {
-    return index == arr.length - 1 || index == arr.length - 2
+    return index === arr.length - 1 || index === arr.length - 2
   })
 
   const navArray = [
