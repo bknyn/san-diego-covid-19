@@ -7,9 +7,9 @@ import SEO from "../components/seo"
 export default ({ data }) => {
   return (
     <Layout>
-      <SEO title="Confirmed Cases" />
+      <SEO title="Hospitalized" />
 
-      <h2>page2</h2>
+      <h2>Hospitalized</h2>
 
     </Layout>
   )
@@ -21,7 +21,7 @@ export const query = graphql`
       edges {
         node {
           dateReported
-          confirmedCases
+          hospitalized
         }
       }
     }

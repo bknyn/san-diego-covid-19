@@ -8,7 +8,6 @@ export default ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <Link to ="/confirmed-cases">link</Link>
       <table>
         <thead>
           <tr>
