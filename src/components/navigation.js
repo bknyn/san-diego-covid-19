@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link, useStaticQuery, graphql } from "gatsby"
+import { PercentDiff } from './helpers.js'
 import NavigationItem from './navigationItem.js'
 
 const Navigation = () => {
@@ -27,36 +28,35 @@ const Navigation = () => {
   const navArray = [
     {
       display: 'Confirmed Cases',
-      count_yesterday: latestNumbers[0].node.confirmedCases,
-      count_today: latestNumbers[1].node.confirmedCases
+      dailyGrowthRate: PercentDiff(latestNumbers[0].node.confirmedCases, latestNumbers[1].node.confirmedCases),
+      countToday: latestNumbers[1].node.confirmedCases
     },
     {
       display: 'Hospitalized',
-      count_yesterday: latestNumbers[0].node.hospitalized,
-      count_today: latestNumbers[1].node.hospitalized
+      dailyGrowthRate: PercentDiff(latestNumbers[0].node.hospitalized, latestNumbers[1].node.hospitalized),
+      countToday: latestNumbers[1].node.hospitalized
     },
     {
       display: 'ICU',
-      count_yesterday: latestNumbers[0].node.icu,
-      count_today: latestNumbers[1].node.icu
+      dailyGrowthRate: PercentDiff(latestNumbers[0].node.icu, latestNumbers[1].node.icu),
+      countToday: latestNumbers[1].node.icu
     },
     {
       display: 'Deaths',
-      count_yesterday: latestNumbers[0].node.deaths,
-      count_today: latestNumbers[1].node.deaths
+      dailyGrowthRate: PercentDiff(latestNumbers[0].node.deaths, latestNumbers[1].node.deaths),
+      countToday: latestNumbers[1].node.deaths
     }
   ]
 
   return (
     <nav className="nav">
-      <div>
-        {navArray.map( (navItemContent, index) => (
-          <NavigationItem
-            key={index}
-            content={navItemContent}
-          />
-        ))}
-      </div>
+      <Link to="/" className="nav__item">Overview</Link>
+      {navArray.map( (navItemContent, index) => (
+        <NavigationItem
+          key={index}
+          content={navItemContent}
+        />
+      ))}
     </nav>
   )
 }
