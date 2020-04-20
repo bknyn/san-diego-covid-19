@@ -3,7 +3,7 @@ import { ResponsiveContainer, BarChart, XAxis, YAxis, CartesianGrid, Bar, Toolti
 
 const ChartBar = ({ chartTitle, segment, content, highValue }) => (
   <div className={`chart chart--bar chart--${segment}`}>
-    <h2 className="chart__title">{chartTitle}</h2>
+    <h2 className="title--section">{chartTitle}</h2>
     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={content}>
         <XAxis dataKey="dateReported" />

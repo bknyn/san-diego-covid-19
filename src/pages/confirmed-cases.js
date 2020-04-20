@@ -15,7 +15,7 @@ export default ({ data }) => {
     <Layout>
       <SEO title="Confirmed Cases" />
 
-      <h1 className="main-content__title main-content__layout--header">Confirmed Cases</h1>
+      <h1 className="title--main main-content__layout--header">Confirmed Cases</h1>
 
       <div className="main-content__layout--charts">
         <ChartBar
@@ -30,6 +30,15 @@ export default ({ data }) => {
           segment="confirmed-cases"
           content={formattedData}
         />
+      </div>
+
+      <div className="main-content__layout--scorecards">
+        <h2 className="title--section">Today vs Yesterday</h2>
+        <div className="scorecard">
+          <h3 className="scorecard__title">Total Cases</h3>
+          <span className="scorecard__big-number">2268</span>
+          <span className="scorecard__comparison">55</span>
+        </div>
       </div>
     </Layout>
   )

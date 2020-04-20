@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import { PercentDiff } from './helpers.js'
 import NavigationItem from './navigationItem.js'
 
