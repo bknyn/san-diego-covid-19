@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -8,7 +8,7 @@ export default ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-
+      <Link to ="/confirmed-cases">link</Link>
       <table>
         <thead>
           <tr>
