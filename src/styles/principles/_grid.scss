@@ -14,7 +14,18 @@ body {
     "nav main-content";
 }
 
-// Grid areas
 .header { grid-area: header; }
 .nav { grid-area: nav; }
-.main-content { grid-area: main-content; }
+
+.main-content {
+  grid-area: main-content;
+  display: grid;
+  grid-template-columns: 70% 1fr;
+  grid-template-areas:
+    "header header"
+    "charts scorecards";
+}
+
+.main-content__layout--header { grid-area: header; }
+.main-content__layout--charts { grid-area: charts; }
+.main-content__layout--scorecards { grid-area: scorecards; }
