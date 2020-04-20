@@ -3,7 +3,7 @@ import { ResponsiveContainer, ComposedChart, XAxis, YAxis, CartesianGrid, Bar, L
 
 const ChartBar = ({ chartTitle, segment, content }) => (
   <div className={`chart chart--combo chart--${segment}`}>
-    <h2 className="chart__title">{chartTitle}</h2>
+    <h2 className="title--section">{chartTitle}</h2>
     <ResponsiveContainer width="100%" height={350}>
       <ComposedChart data={content}>
         <XAxis dataKey="dateReported" />
