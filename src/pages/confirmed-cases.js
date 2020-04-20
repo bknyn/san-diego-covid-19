@@ -1,15 +1,17 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { DataFormatter } from '../components/helpers'
+import { PercentDiff, DataFormatter } from '../components/helpers'
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import ChartBar from '../components/chartBar'
 import ChartCombo from '../components/chartCombo'
+import Scorecard from "../components/scorecard"
 
 export default ({ data }) => {
   const highestRawData = data.allGoogleSpreadsheetRawData.edges.reduce((max, node) => max.confirmedCases > node.confirmedCases ? max : node)
   const formattedData = DataFormatter(data.allGoogleSpreadsheetRawData.edges, 'confirmedCases')
+  const lastThreeDays = formattedData.slice(formattedData.length - 3, formattedData.length)
 
   return (
     <Layout>
@@ -34,11 +36,19 @@ export default ({ data }) => {
 
       <div className="main-content__layout--scorecards">
         <h2 className="title--section">Today vs Yesterday</h2>
-        <div className="scorecard">
-          <h3 className="scorecard__title">Total Cases</h3>
-          <span className="scorecard__big-number">2268</span>
-          <span className="scorecard__comparison">55</span>
-        </div>
+        <Scorecard
+          title="Total Cases"
+          bigNumber={lastThreeDays[2].rawDataPoint}
+          comparison={lastThreeDays[2].dailyDelta}
+        />
+
+        <Scorecard
+          title="Growth Rate"
+          bigNumber={`${PercentDiff(lastThreeDays[1].rawDataPoint, lastThreeDays[2].rawDataPoint)}%`}
+          comparison={
+            `${(PercentDiff(lastThreeDays[1].rawDataPoint, lastThreeDays[2].rawDataPoint) - PercentDiff(lastThreeDays[0].rawDataPoint, lastThreeDays[1].rawDataPoint)).toFixed(2)}%`
+          }
+        />
       </div>
     </Layout>
   )
