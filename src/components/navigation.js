@@ -1,7 +1,6 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import { PercentDiff } from './helpers.js'
-import NavigationItem from './navigationItem.js'
 
 const Navigation = () => {
   const data = useStaticQuery(graphql`
@@ -20,40 +19,43 @@ const Navigation = () => {
   `)
 
   const dataEdges = data.allGoogleSpreadsheetRawData.edges
-  const latestNumbers = dataEdges.filter((elem, index, arr) => {
-    return index === arr.length - 1 || index === arr.length - 2
-  })
+  const lastTwoDays = dataEdges.slice(dataEdges.length - 2, dataEdges.length)
+  const navTitlesWithInlineData = ['Confirmed Cases', 'Hospitalized', 'ICU', 'Deaths']
 
-  const navArray = [
-    {
-      display: 'Confirmed Cases',
-      dailyGrowthRate: PercentDiff(latestNumbers[0].node.confirmedCases, latestNumbers[1].node.confirmedCases),
-      countToday: latestNumbers[1].node.confirmedCases
-    },
-    {
-      display: 'Hospitalized',
-      dailyGrowthRate: PercentDiff(latestNumbers[0].node.hospitalized, latestNumbers[1].node.hospitalized),
-      countToday: latestNumbers[1].node.hospitalized
-    },
-    {
-      display: 'ICU',
-      dailyGrowthRate: PercentDiff(latestNumbers[0].node.icu, latestNumbers[1].node.icu),
-      countToday: latestNumbers[1].node.icu
-    },
-    {
-      display: 'Deaths',
-      dailyGrowthRate: PercentDiff(latestNumbers[0].node.deaths, latestNumbers[1].node.deaths),
-      countToday: latestNumbers[1].node.deaths
+  // Format array that will be looped to form the nav with quick insight data
+  const navItemsWithInlineData = navTitlesWithInlineData.map( (title) => {
+    const slug = title.toLowerCase().replace(/\s+/g, '-') // lower case and replace spaces with hyphens
+    const camelCaseKey = slug.replace(/-([a-z])/g, (g) => g[1].toUpperCase() ) // used in graphql lookup
+    const totalToday = lastTwoDays[1].node[camelCaseKey]
+    const totalYesterday = lastTwoDays[0].node[camelCaseKey]
+
+    return {
+      display: title,
+      slug: slug,
+      growthRateToday: PercentDiff(totalYesterday, totalToday),
+      totalToday: totalToday
     }
-  ]
+  })
 
   return (
     <nav className="nav">
-      {navArray.map( (navItemContent, index) => (
-        <NavigationItem
+      {navItemsWithInlineData.map( (navItemData, index) => (
+        <Link
           key={index}
-          content={navItemContent}
-        />
+          to={`/${navItemData.slug}`}
+          className="nav__item"
+        >
+          {navItemData.display}
+          <div className="nav__item__number-container">
+            <span className="nav__item__daily-count">
+              {/* Add commas to number string */}
+              {navItemData.totalToday.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            </span>
+            <span className={`nav__item__daily-growth-rate ${navItemData.growthRateToday > 0 ? 'text--bad-direction' : 'text--good-direction'}`} >
+              {`${navItemData.growthRateToday >= 0 ? '+' : '-'} ${navItemData.growthRateToday}%`}
+            </span>
+          </div>
+        </Link>
       ))}
     </nav>
   )
