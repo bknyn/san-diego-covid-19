@@ -16,9 +16,13 @@ body {
 
 .header { grid-area: header; }
 .nav { grid-area: nav; }
-
 .main-content {
   grid-area: main-content;
+  overflow-y: scroll;
+}
+
+.layout--standard-page {
+  padding: 2em;
   display: grid;
   grid-template-columns: 70% 1fr;
   grid-column-gap: 2rem;
@@ -27,6 +31,6 @@ body {
     "charts scorecards";
 }
 
-.main-content__layout--header { grid-area: header; }
-.main-content__layout--charts { grid-area: charts; }
-.main-content__layout--scorecards { grid-area: scorecards; }
+.layout__header--standard-page { grid-area: header; }
+.layout__charts--standard-page { grid-area: charts; }
+.layout__scorecards--standard-page { grid-area: scorecards; }

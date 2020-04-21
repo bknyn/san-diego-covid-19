@@ -8,16 +8,25 @@ import ChartBar from '../components/chartBar'
 import ChartCombo from '../components/chartCombo'
 import Scorecard from "../components/scorecard"
 
+import StandardPage from '../components/standardPage'
+
 export default ({ data }) => {
   const highestRawData = data.allGoogleSpreadsheetRawData.edges.reduce((max, node) => max.confirmedCases > node.confirmedCases ? max : node)
   const formattedData = DataFormatter(data.allGoogleSpreadsheetRawData.edges, 'confirmedCases')
   const lastThreeDays = formattedData.slice(formattedData.length - 3, formattedData.length)
 
+  const title = 'Confirmed Cases'
+
   return (
     <Layout>
-      <SEO title="Confirmed Cases" />
+      <SEO title={title} />
 
-      <h1 className="title--main main-content__layout--header">Confirmed Cases</h1>
+      <StandardPage
+        title={title}
+        dataEdges={data.allGoogleSpreadsheetRawData.edges}
+      />
+
+      {/* <h1 className="title--main main-content__layout--header">Confirmed Cases</h1> */}
 
       <div className="main-content__layout--charts">
         <ChartBar
