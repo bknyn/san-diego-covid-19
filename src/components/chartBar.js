@@ -10,7 +10,7 @@ const ChartBar = ({ chartTitle, segment, content, highValue }) => (
         <YAxis domain={[0, dataMax => highValue]} type="number" allowDataOverflow={true} />
         <CartesianGrid stroke="#f5f5f5" />
         <Tooltip />
-        <Bar dataKey="rawDataPoint" />
+        <Bar dataKey="dataPoint" />
       </BarChart>
     </ResponsiveContainer>
   </div>
