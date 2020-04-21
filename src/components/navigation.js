@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
-import { PercentDiff } from './helpers.js'
+import { PercentDiff, StringFormatter } from './helpers.js'
 
 const Navigation = () => {
   const data = useStaticQuery(graphql`
@@ -24,8 +24,8 @@ const Navigation = () => {
 
   // Format array that will be looped to form the nav with quick insight data
   const navItemsWithInlineData = navTitlesWithInlineData.map( (title) => {
-    const slug = title.toLowerCase().replace(/\s+/g, '-') // lower case and replace spaces with hyphens
-    const camelCaseKey = slug.replace(/-([a-z])/g, (g) => g[1].toUpperCase() ) // used in graphql lookup
+    const slug = StringFormatter(title, 'slug')
+    const camelCaseKey = StringFormatter(title, 'camelCase')
     const totalToday = lastTwoDays[1].node[camelCaseKey]
     const totalYesterday = lastTwoDays[0].node[camelCaseKey]
 
