@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const google_private_key = Buffer.from(process.env.GOOGLE_AUTH_COVID_19, 'base64').toString('ascii');
 
 module.exports = {
