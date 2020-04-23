@@ -39,6 +39,7 @@ const Navigation = () => {
 
   return (
     <nav className="nav">
+      <Link to='/' className="nav__item">Overview</Link>
       {navItemsWithInlineData.map( (navItemData, index) => (
         <Link
           key={index}
