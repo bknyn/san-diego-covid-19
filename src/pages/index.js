@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
+import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar } from 'recharts'
 
 export default ({ data }) => {
   const pageData = data.allGoogleSpreadsheetRawData.edges.map(({node}) => {
@@ -20,6 +21,22 @@ export default ({ data }) => {
     <Layout>
       <SEO title="Confirmed Cases" />
       <h1 className="title--main main-content__layout--header">Overview</h1>
+
+      <div className="chart chart--bar">
+        <h2 className="title--section">Overall Rates (Confirmed cases / hospitalized|icu|deaths)</h2>
+        <ResponsiveContainer width="100%" height={350}>
+          <BarChart data={pageData}>
+            <CartesianGrid />
+            <XAxis dataKey="dateReported" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="hospitalizedRate" className="chart--hospitalized" />
+            <Bar dataKey="icuRate" className="chart--icu" />
+            <Bar dataKey="deathRate" className="chart--deaths" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
     </Layout>
   )
 }
