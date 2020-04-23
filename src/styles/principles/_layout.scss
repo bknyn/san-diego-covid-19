@@ -19,10 +19,10 @@ body {
 .main-content {
   grid-area: main-content;
   overflow-y: scroll;
+  padding: 2em;
 }
 
 .layout--standard-page {
-  padding: 2em;
   display: grid;
   grid-template-columns: 70% 1fr;
   grid-column-gap: 2rem;

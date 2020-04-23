@@ -10,7 +10,7 @@ export default ({ data }) => {
     <Layout>
       <SEO title="Confirmed Cases" />
 
-      <h1 className="title--main main-content__layout--header">Confirmed Cases</h1>
+      <h1 className="title--main main-content__layout--header">Overview</h1>
 
     </Layout>
   )
