@@ -11,26 +11,26 @@ body {
   grid-template-rows: $header-height auto;
   grid-template-areas:
     "header header"
-    "nav main-content";
+    "nav main";
 }
 
 .header { grid-area: header; }
+
 .nav { grid-area: nav; }
-.main-content {
-  grid-area: main-content;
+
+.main {
+  grid-area: main;
   overflow-y: scroll;
-  padding: 2em;
-}
-
-.layout--standard-page {
   display: grid;
-  grid-template-columns: 70% 1fr;
-  grid-column-gap: 2rem;
-  grid-template-areas:
-    "header header"
-    "charts scorecards";
 }
 
-.layout__header--standard-page { grid-area: header; }
-.layout__charts--standard-page { grid-area: charts; }
-.layout__scorecards--standard-page { grid-area: scorecards; }
+.main__header {
+  margin-bottom: $spacer * 2;
+  padding-bottom: $spacer * 2;
+  border-bottom: 1px solid $grey-bg;
+  padding: $spacer * 2;
+}
+
+.main__content {
+  padding: $spacer * 2;
+}
