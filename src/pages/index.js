@@ -24,7 +24,7 @@ export default ({ data }) => {
 
       <div className="main__content">
         <div className="chart chart--bar">
-          <h2 className="title--section">Overall Rates (Confirmed cases / hospitalized|icu|deaths)</h2>
+          <h2 className="text-centered">Overall Rates (Confirmed cases / hospitalized|icu|deaths)</h2>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={pageData}>
               <CartesianGrid />

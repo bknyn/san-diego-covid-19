@@ -44,7 +44,7 @@ const StandardPage = ({title, dataEdges}) => {
       </div>
 
       <div className="standard-page__scorecards">
-        <h2 className="title--section">Today vs Yesterday</h2>
+        <h2 className="text-centered">Today vs Yesterday</h2>
 
         <Scorecard
           title="Total Cases"
