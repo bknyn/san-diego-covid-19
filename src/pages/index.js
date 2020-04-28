@@ -15,8 +15,6 @@ export default ({ data }) => {
     }
   })
 
-  console.log(pageData)
-
   return (
     <Layout>
       <SEO title="Confirmed Cases" />
