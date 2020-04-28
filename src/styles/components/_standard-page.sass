@@ -1,4 +1,6 @@
 .standard-page
   display: grid
-  grid-template-columns: 70% 1fr
-  grid-column-gap: 2rem
+
+  @media (min-width: $screen-md)
+    grid-template-columns: 70% 1fr
+    grid-column-gap: 2rem

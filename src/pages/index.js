@@ -19,7 +19,6 @@ export default ({ data }) => {
     <Layout>
       <SEO title="Confirmed Cases" />
       <h1 className="main__header">Overview</h1>
-
       <div className="main__content">
         <div className="chart chart--bar">
           <h2 className="text-centered">Overall Rates (Confirmed cases / hospitalized|icu|deaths)</h2>

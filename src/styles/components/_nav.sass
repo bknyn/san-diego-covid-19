@@ -1,6 +1,9 @@
 .nav
   z-index: 100
 
+  @media (min-width: $screen-lg)
+    background-color: $grey-bg
+
 .nav__mobile-toggle
   position: relative
   z-index: 100
@@ -10,6 +13,9 @@
   width: $header-height
   padding: 1rem
   outline: none
+
+  @media (min-width: $screen-lg)
+    display: none
 
   > span
     display: block
@@ -56,6 +62,11 @@
 
   .nav--open &
     transform: translateX(0)
+
+  @media (min-width: $screen-lg)
+    position: relative
+    transform: translateX(0)
+    top: auto
 
 .nav__item
   display: grid

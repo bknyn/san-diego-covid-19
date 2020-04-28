@@ -13,7 +13,7 @@ body {
     "header nav"
     "main main";
 
-  @media (min-width: $screen-sm) {
+  @media (min-width: $screen-lg) {
     grid-template-columns: $nav-width 1fr;
     grid-template-rows: $header-height auto;
     grid-template-areas:
@@ -29,6 +29,7 @@ body {
   grid-area: main;
   overflow-y: scroll;
   display: grid;
+  grid-auto-rows: min-content
 }
 
 .main__header {
@@ -37,7 +38,7 @@ body {
   border-bottom: 1px solid $grey-bg;
   padding: $spacer;
 
-  @media (min-width: $screen-sm) {
+  @media (min-width: $screen-lg) {
     padding: $spacer * 2;
   }
 }
@@ -45,7 +46,7 @@ body {
 .main__content {
   padding: $spacer;
 
-  @media (min-width: $screen-sm) {
+  @media (min-width: $screen-lg) {
     padding: $spacer * 2;
   }
 }
