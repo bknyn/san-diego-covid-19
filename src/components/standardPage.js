@@ -27,10 +27,8 @@ const StandardPage = ({title, dataEdges}) => {
   const lastThreeDays = formattedData.slice(formattedData.length - 3, formattedData.length)
 
   return (
-    <div className="layout--standard-page">
-      <h1 className="title--main layout__header--standard-page">{title}</h1>
-
-      <div className="layout__charts--standard-page">
+    <div className="main__content standard-page">
+      <div className="standard-page__charts">
         <ChartBar
           chartTitle="Daily Total Reported"
           segment={slug}
@@ -45,8 +43,8 @@ const StandardPage = ({title, dataEdges}) => {
         />
       </div>
 
-      <div className="layout__scorecards--standard-page">
-        <h2 className="title--section">Today vs Yesterday</h2>
+      <div className="standard-page__scorecards">
+        <h2 className="text-centered">Today vs Yesterday</h2>
 
         <Scorecard
           title="Total Cases"

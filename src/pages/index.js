@@ -15,26 +15,25 @@ export default ({ data }) => {
     }
   })
 
-  console.log(pageData)
-
   return (
     <Layout>
       <SEO title="Confirmed Cases" />
-      <h1 className="title--main main-content__layout--header">Overview</h1>
-
-      <div className="chart chart--bar">
-        <h2 className="title--section">Overall Rates (Confirmed cases / hospitalized|icu|deaths)</h2>
-        <ResponsiveContainer width="100%" height={350}>
-          <BarChart data={pageData}>
-            <CartesianGrid />
-            <XAxis dataKey="dateReported" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="hospitalizedRate" className="chart--hospitalized" />
-            <Bar dataKey="icuRate" className="chart--icu" />
-            <Bar dataKey="deathRate" className="chart--deaths" />
-          </BarChart>
-        </ResponsiveContainer>
+      <h1 className="main__header">Overview</h1>
+      <div className="main__content">
+        <div className="chart chart--bar">
+          <h2 className="text-centered">Overall Rates (Confirmed cases / hospitalized|icu|deaths)</h2>
+          <ResponsiveContainer width="100%" height={350}>
+            <BarChart data={pageData}>
+              <CartesianGrid />
+              <XAxis dataKey="dateReported" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="hospitalizedRate" className="chart--hospitalized" />
+              <Bar dataKey="icuRate" className="chart--icu" />
+              <Bar dataKey="deathRate" className="chart--deaths" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
 
     </Layout>
