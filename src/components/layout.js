@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
@@ -15,7 +15,7 @@ import Navigation from "./navigation"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+    query LayoutStaticQuery {
       site {
         siteMetadata {
           title
@@ -24,10 +24,12 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const [navOpen, setNavOpen] = useState(false)
+
   return (
-    <div className="container">
+    <div className={`container ${navOpen ? 'nav--open' : 'nav--closed'}`}>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <Navigation />
+      <Navigation navOpen={navOpen} setNavOpen={setNavOpen} />
       <main className="main">{children}</main>
       {/* <footer className="footer">
         Built with
