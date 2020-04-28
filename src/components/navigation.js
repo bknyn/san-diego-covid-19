@@ -48,7 +48,7 @@ const Navigation = ({navOpen, setNavOpen}) => {
         {navItemsWithInlineData.map( (navItemData, index) => (
           <Link
             key={index}
-            to={`/${navItemData.slug}`}
+            to={`/${navItemData.slug}/`}
             className="nav__item"
           >
             {navItemData.display}
