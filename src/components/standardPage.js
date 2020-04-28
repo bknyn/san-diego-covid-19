@@ -23,7 +23,6 @@ const StandardPage = ({title, dataEdges}) => {
     }
   })
 
-  const highestDataNode = formattedData.reduce((max, node) => max.dataPoint > node.dataPoint ? max : node)
   const lastThreeDays = formattedData.slice(formattedData.length - 3, formattedData.length)
 
   return (
@@ -31,14 +30,13 @@ const StandardPage = ({title, dataEdges}) => {
       <div className="standard-page__charts">
         <ChartBar
           chartTitle="Daily Total Reported"
-          segment={slug}
+          segment={camelCaseKey}
           content={formattedData}
-          highValue={highestDataNode.dataPoint}
         />
 
         <ChartCombo
           chartTitle="Daily Change (TODO:: fix moving average)"
-          segment={slug}
+          segment={camelCaseKey}
           content={formattedData}
         />
       </div>
