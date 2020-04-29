@@ -1,23 +1,20 @@
 import React from 'react'
-import { PercentDiff, StringFormatter } from './helpers'
-import ChartBar from '../components/chartBar'
-import ChartCombo from '../components/chartCombo'
-import Scorecard from '../components/scorecard'
+import { PercentDiff } from './helpers'
+import DailyTotalChart from './dailyTotalChart'
+import DailyDeltaChart from './dailyDeltaChart'
+import Scorecard from './scorecard'
 
-const StandardPage = ({title, dataEdges}) => {
-  const slug = StringFormatter(title, 'slug')
-  const camelCaseKey = StringFormatter(title, 'camelCase')
-
+const StandardPage = ({segment, dataEdges}) => {
   const formattedData = dataEdges.map( ({node}, index, array) => {
-    const totalToday = node[camelCaseKey]
-    const totalYesterday = index > 0 ? array[index - 1].node[camelCaseKey] : null
+    const totalToday = node[segment.camelCaseKey]
+    const totalYesterday = index > 0 ? array[index - 1].node[segment.camelCaseKey] : null
 
     const delta = totalToday - totalYesterday
     const growthRate = PercentDiff(totalYesterday, totalToday)
 
     return {
       ...node,
-      dataPoint: parseInt(node[camelCaseKey], 0),
+      dataPoint: parseInt(node[segment.camelCaseKey], 0),
       dailyDelta: delta,
       growthRate: growthRate === 'Infinity' ? null : growthRate
     }
@@ -28,15 +25,13 @@ const StandardPage = ({title, dataEdges}) => {
   return (
     <div className="main__content standard-page">
       <div className="standard-page__charts">
-        <ChartBar
-          chartTitle="Daily Total Reported"
-          segment={camelCaseKey}
+        <DailyTotalChart
+          segment={segment}
           content={formattedData}
         />
 
-        <ChartCombo
-          chartTitle="Daily Change (TODO:: fix moving average)"
-          segment={camelCaseKey}
+        <DailyDeltaChart
+          segment={segment}
           content={formattedData}
         />
       </div>
