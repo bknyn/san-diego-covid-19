@@ -18,7 +18,7 @@ export default ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Confirmed Cases" />
+      <SEO title="Overview" />
       <h1 className="main__header">Overview</h1>
       <div className="main__content">
         <div className="chart chart--bar">
