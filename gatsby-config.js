@@ -4,7 +4,7 @@ const google_private_key = Buffer.from(process.env.GOOGLE_AUTH_COVID_19, 'base64
 
 module.exports = {
   siteMetadata: {
-    title: `San Diego COVID-19`,
+    title: `COVID-19 in San Diego County`,
     description: `Visualizations of COVID-19 in San Diego County`,
     author: `@bpknyn`,
   },

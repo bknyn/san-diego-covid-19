@@ -4,7 +4,7 @@ import React from "react"
 
 const Header = ({ siteTitle }) => (
   <header className="header">
-    <Link to="/" className="header__site-title">{siteTitle}</Link>
+    <Link to="/" className="header__site-title">San Diego County COVID 19</Link>
   </header>
 )
 
