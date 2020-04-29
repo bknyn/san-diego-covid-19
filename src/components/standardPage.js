@@ -7,15 +7,15 @@ import Scorecard from './scorecard'
 
 const StandardPage = ({segment, dataEdges}) => {
   const formattedData = dataEdges.map( ({node}, index, array) => {
-    const totalToday = node[segment.camelCaseKey]
-    const totalYesterday = index > 0 ? array[index - 1].node[segment.camelCaseKey] : null
+    const totalToday = node[segment.camelCase]
+    const totalYesterday = index > 0 ? array[index - 1].node[segment.camelCase] : null
 
     const delta = totalToday - totalYesterday
     const growthRate = PercentDiff(totalYesterday, totalToday)
 
     return {
       ...node,
-      dataPoint: parseInt(node[segment.camelCaseKey], 0),
+      dataPoint: parseInt(node[segment.camelCase], 0),
       dailyDelta: delta,
       growthRate: growthRate === 'Infinity' ? null : growthRate
     }

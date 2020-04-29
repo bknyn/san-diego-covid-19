@@ -1,17 +1,13 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { StringFormatter } from '../utils/strings'
+import { SegmentFormatter } from '../utils/general'
 
 import Layout from '../components/layout'
 import StandardPage from '../components/standardPage'
 import SEO from '../components/seo'
 
 export default ({ data }) => {
-  const segment = {
-    title: 'Deaths',
-    get slug() { return StringFormatter(this.title, 'slug') },
-    get camelCaseKey() { return StringFormatter(this.title, 'camelCase') }
-  }
+  const segment = SegmentFormatter('Deaths')
 
   return (
     <Layout>

@@ -1,8 +1,8 @@
 import React from "react"
 import PropTypes from 'prop-types'
 import { Link, useStaticQuery, graphql } from "gatsby"
-import { StringFormatter } from '../utils/strings'
 import { PercentDiff } from '../utils/maths'
+import { SegmentFormatter } from "../utils/general"
 
 const Navigation = ({navOpen, setNavOpen}) => {
   const data = useStaticQuery(graphql`
@@ -27,14 +27,13 @@ const Navigation = ({navOpen, setNavOpen}) => {
 
   // Format array that will be looped to form the nav with quick insight data
   const navItemsWithInlineData = navTitlesWithInlineData.map( (title) => {
-    const slug = StringFormatter(title, 'slug')
-    const camelCaseKey = StringFormatter(title, 'camelCase')
-    const totalToday = lastTwoDays[1].node[camelCaseKey]
-    const totalYesterday = lastTwoDays[0].node[camelCaseKey]
+    const segment = SegmentFormatter(title)
+    const totalToday = lastTwoDays[1].node[segment.camelCase]
+    const totalYesterday = lastTwoDays[0].node[segment.camelCase]
 
     return {
-      display: title,
-      slug: slug,
+      display: segment.title,
+      slug: segment.slug,
       growthRateToday: PercentDiff(totalYesterday, totalToday),
       totalToday: totalToday
     }

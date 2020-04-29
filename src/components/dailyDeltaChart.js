@@ -24,7 +24,7 @@ const DailyDeltaChart = ({ segment, content }) => {
           <Bar
             dataKey="dailyDelta"
             name={segment.title}
-            fill={sassVars[segment.camelCaseKey + 'Color']}
+            fill={sassVars[segment.camelCase + 'Color']}
           />
           <Line
             type="monotone"

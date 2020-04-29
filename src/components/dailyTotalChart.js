@@ -16,7 +16,7 @@ const DailyTotalChart = ({ segment, content }) => {
           <Bar
             dataKey="dataPoint"
             name={segment.title}
-            fill={sassVars[segment.camelCaseKey + 'Color']}
+            fill={sassVars[segment.camelCase + 'Color']}
           />
         </BarChart>
       </ResponsiveContainer>
