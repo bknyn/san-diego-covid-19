@@ -1,8 +1,9 @@
-import React from "react"
+import React from 'react'
 import PropTypes from 'prop-types'
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from 'gatsby'
 import { PercentDiff } from '../utils/maths'
-import { SegmentFormatter } from "../utils/general"
+import { SegmentFormatter } from '../utils/general'
+import { AddCommasToNumberString, AddPrefixOperator } from '../utils/decorators'
 
 const Navigation = ({navOpen, setNavOpen}) => {
   const data = useStaticQuery(graphql`
@@ -55,11 +56,10 @@ const Navigation = ({navOpen, setNavOpen}) => {
             {navItemData.display}
             <div className="nav__item__number-container">
               <span className="nav__item__daily-count">
-                {/* Add commas to number string */}
-                {navItemData.totalToday.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                {AddCommasToNumberString(navItemData.totalToday)}
               </span>
               <span className="nav__item__daily-growth-rate" >
-                {`${navItemData.growthRateToday >= 0 ? '+' : '-'} ${navItemData.growthRateToday}%`}
+                {`${AddPrefixOperator(navItemData.growthRateToday)}%`}
               </span>
             </div>
           </Link>
