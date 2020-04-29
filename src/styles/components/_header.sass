@@ -1,7 +1,11 @@
 .header
   padding: $spacer
 
+  @media (min-width: $screen-lg)
+    padding: $spacer * 2 $spacer
+
 .header__site-title
   font-size: 2.4rem
+  line-height: 1.2
   color: $grey-dark
   text-decoration: none

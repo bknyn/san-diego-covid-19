@@ -32,12 +32,19 @@ body {
   display: grid;
   grid-auto-rows: min-content;
   background-color: $white;
+  box-shadow: 0 0 8px rgba($grey-dark, .3);
+  z-index: 50;
+  transform: translateX(0);
+  transition: transform .15s ease-in-out;
+
+  .nav--open & {
+    transform: translateX($nav-width);
+  }
 
   @media (min-width: $screen-lg) {
     overflow-y: scroll;
     height: 100vh;
-    z-index: 100;
-    box-shadow: 0 0 8px rgba($grey-dark, .3);
+    transform: translateX(0);
   }
 }
 

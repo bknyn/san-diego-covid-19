@@ -49,7 +49,7 @@ const Navigation = ({navOpen, setNavOpen}) => {
           <Link
             key={index}
             to={`/${navItemData.slug}/`}
-            className="nav__item"
+            className={`nav__item ${'nav__item--' + navItemData.slug}`}
           >
             {navItemData.display}
             <div className="nav__item__number-container">
@@ -57,7 +57,7 @@ const Navigation = ({navOpen, setNavOpen}) => {
                 {/* Add commas to number string */}
                 {navItemData.totalToday.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
               </span>
-              <span className={`nav__item__daily-growth-rate ${navItemData.growthRateToday > 0 ? 'text--bad-direction' : 'text--good-direction'}`} >
+              <span className="nav__item__daily-growth-rate" >
                 {`${navItemData.growthRateToday >= 0 ? '+' : '-'} ${navItemData.growthRateToday}%`}
               </span>
             </div>
