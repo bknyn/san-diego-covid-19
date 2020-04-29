@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { PercentDiff } from './helpers'
 import DailyTotalChart from './dailyTotalChart'
 import DailyDeltaChart from './dailyDeltaChart'
@@ -55,6 +56,11 @@ const StandardPage = ({segment, dataEdges}) => {
       </div>
     </div>
   )
+}
+
+StandardPage.propTypes = {
+  segment: PropTypes.object,
+  dataEdges: PropTypes.array
 }
 
 export default StandardPage
