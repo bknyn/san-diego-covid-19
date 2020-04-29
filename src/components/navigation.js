@@ -1,7 +1,8 @@
 import React from "react"
 import PropTypes from 'prop-types'
 import { Link, useStaticQuery, graphql } from "gatsby"
-import { PercentDiff, StringFormatter } from './helpers.js'
+import { StringFormatter } from '../utils/strings'
+import { PercentDiff } from '../utils/maths'
 
 const Navigation = ({navOpen, setNavOpen}) => {
   const data = useStaticQuery(graphql`

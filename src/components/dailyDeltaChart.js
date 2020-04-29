@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from 'prop-types'
-import { CalculateMovingAverage } from './helpers'
+import { CalculateMovingAverage } from '../utils/maths'
 import { ResponsiveContainer, ComposedChart, XAxis, YAxis, CartesianGrid, Bar, Line, Tooltip } from 'recharts'
 import sassVars from '../styles/principles/_variables.scss'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { PercentDiff } from './helpers'
+import { PercentDiff } from '../utils/maths'
 import DailyTotalChart from './dailyTotalChart'
 import DailyDeltaChart from './dailyDeltaChart'
 import Scorecard from './scorecard'

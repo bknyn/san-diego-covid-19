@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { StringFormatter } from '../components/helpers'
+import { StringFormatter } from '../utils/strings'
 
 import Layout from '../components/layout'
 import StandardPage from '../components/standardPage'
