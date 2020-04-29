@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { AddCommasToNumberString, AddPrefixOperator } from '../utils/decorators'
 import { PercentDiff } from '../utils/maths'
 import DailyTotalChart from './dailyTotalChart'
 import DailyDeltaChart from './dailyDeltaChart'
@@ -21,7 +22,10 @@ const StandardPage = ({segment, dataEdges}) => {
     }
   })
 
-  const lastThreeDays = formattedData.slice(formattedData.length - 3, formattedData.length)
+  const today = formattedData[formattedData.length - 1]
+  const yesterday = formattedData[formattedData.length - 2]
+  const highestDailyChange = formattedData.reduce((max, node) => max.dailyDelta > node.dailyDelta ? max : node)
+  const highestGrowthRate = formattedData.reduce((max, node) => max.growthRate > node.growthRate ? max : node)
 
   return (
     <div className="main__content standard-page">
@@ -38,20 +42,37 @@ const StandardPage = ({segment, dataEdges}) => {
       </div>
 
       <div className="standard-page__scorecards">
-        <h2 className="text-centered">Today vs Yesterday</h2>
+        <h2 className="text-centered">Today</h2>
 
         <Scorecard
           title="Total Cases"
-          bigNumber={lastThreeDays[2].dataPoint}
-          comparison={lastThreeDays[2].dailyDelta}
+          bigNumber={AddCommasToNumberString(today.dataPoint.toString())}
+          subtextValue={today.dailyDelta}
+          subtextFormatter={(value) => `${AddPrefixOperator(value)} vs yesterday`}
+          subtextComparison={true}
         />
 
         <Scorecard
           title="Growth Rate"
-          bigNumber={`${PercentDiff(lastThreeDays[1].dataPoint, lastThreeDays[2].dataPoint)}%`}
-          comparison={
-            `${(PercentDiff(lastThreeDays[1].dataPoint, lastThreeDays[2].dataPoint) - PercentDiff(lastThreeDays[0].dataPoint, lastThreeDays[1].dataPoint)).toFixed(2)}%`
-          }
+          bigNumber={`${PercentDiff(yesterday.dataPoint, today.dataPoint)}%`}
+          subtextValue={(today.growthRate - yesterday.growthRate).toFixed(2)}
+          subtextFormatter={(value) => `${AddPrefixOperator(value)}% vs yesterday`}
+          subtextComparison={true}
+        />
+
+        <h2 className="text-centered">Highs</h2>
+        <Scorecard
+          title="Highest Daily Change"
+          bigNumber={`${AddCommasToNumberString(highestDailyChange.dailyDelta.toString())}`}
+          subtextValue={highestDailyChange.dateReported}
+          subtextFormatter={(value) => `on ${value}`}
+        />
+
+        <Scorecard
+          title="Highest Growth Rate"
+          bigNumber={`${highestGrowthRate.growthRate}%`}
+          subtextValue={highestGrowthRate.dateReported}
+          subtextFormatter={(value) => `on ${value}`}
         />
       </div>
     </div>

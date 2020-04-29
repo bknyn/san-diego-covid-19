@@ -1,8 +1,9 @@
-import React from "react"
+import React from 'react'
 import PropTypes from 'prop-types'
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from 'gatsby'
 import { PercentDiff } from '../utils/maths'
-import { SegmentFormatter } from "../utils/general"
+import { SegmentFormatter } from '../utils/general'
+import { AddCommasToNumberString, AddPrefixOperator } from '../utils/decorators'
 
 const Navigation = ({navOpen, setNavOpen}) => {
   const data = useStaticQuery(graphql`
@@ -20,16 +21,14 @@ const Navigation = ({navOpen, setNavOpen}) => {
     }
   `)
 
-  const lastTwoDays = data.allGoogleSpreadsheetRawData.edges.slice(
-                      data.allGoogleSpreadsheetRawData.edges.length - 2, data.allGoogleSpreadsheetRawData.edges.length)
-
-  const navTitlesWithInlineData = ['Confirmed Cases', 'Hospitalized', 'ICU', 'Deaths']
+  const dynamicNavTitles = ['Confirmed Cases', 'Hospitalized', 'ICU', 'Deaths']
+  const dataEdges = data.allGoogleSpreadsheetRawData.edges
 
   // Format array that will be looped to form the nav with quick insight data
-  const navItemsWithInlineData = navTitlesWithInlineData.map( (title) => {
+  const dynamicNavItems = dynamicNavTitles.map( (title) => {
     const segment = SegmentFormatter(title)
-    const totalToday = lastTwoDays[1].node[segment.camelCase]
-    const totalYesterday = lastTwoDays[0].node[segment.camelCase]
+    const totalToday = dataEdges[dataEdges.length - 1].node[segment.camelCase]
+    const totalYesterday = dataEdges[dataEdges.length - 2].node[segment.camelCase]
 
     return {
       display: segment.title,
@@ -46,7 +45,7 @@ const Navigation = ({navOpen, setNavOpen}) => {
       </button>
       <div className="nav__items">
         <Link to='/' className="nav__item">Overview</Link>
-        {navItemsWithInlineData.map( (navItemData, index) => (
+        {dynamicNavItems.map( (navItemData, index) => (
           <Link
             key={index}
             to={`/${navItemData.slug}/`}
@@ -55,11 +54,10 @@ const Navigation = ({navOpen, setNavOpen}) => {
             {navItemData.display}
             <div className="nav__item__number-container">
               <span className="nav__item__daily-count">
-                {/* Add commas to number string */}
-                {navItemData.totalToday.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                {AddCommasToNumberString(navItemData.totalToday)}
               </span>
               <span className="nav__item__daily-growth-rate" >
-                {`${navItemData.growthRateToday >= 0 ? '+' : '-'} ${navItemData.growthRateToday}%`}
+                {`${AddPrefixOperator(navItemData.growthRateToday)}%`}
               </span>
             </div>
           </Link>
