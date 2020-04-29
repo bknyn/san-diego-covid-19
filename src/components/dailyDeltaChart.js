@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from 'prop-types'
 import { CalculateMovingAverage } from './helpers'
 import { ResponsiveContainer, ComposedChart, XAxis, YAxis, CartesianGrid, Bar, Line, Tooltip } from 'recharts'
 import sassVars from '../styles/principles/_variables.scss'
@@ -37,6 +38,11 @@ const DailyDeltaChart = ({ segment, content }) => {
       </ResponsiveContainer>
     </div>
   )
+}
+
+DailyDeltaChart.propTypes = {
+  segment: PropTypes.object,
+  content: PropTypes.array
 }
 
 export default DailyDeltaChart

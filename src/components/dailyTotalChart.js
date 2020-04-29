@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from 'prop-types'
 import { ResponsiveContainer, BarChart, XAxis, YAxis, CartesianGrid, Bar, Tooltip } from 'recharts'
 import sassVars from '../styles/principles/_variables.scss'
 
@@ -21,6 +22,11 @@ const DailyTotalChart = ({ segment, content }) => {
       </ResponsiveContainer>
     </div>
   )
+}
+
+DailyTotalChart.propTypes = {
+  segment: PropTypes.object,
+  content: PropTypes.array
 }
 
 export default DailyTotalChart

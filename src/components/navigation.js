@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from 'prop-types'
 import { Link, useStaticQuery, graphql } from "gatsby"
 import { PercentDiff, StringFormatter } from './helpers.js'
 
@@ -66,6 +67,11 @@ const Navigation = ({navOpen, setNavOpen}) => {
       </div>
     </nav>
   )
+}
+
+Navigation.propTypes = {
+  navOpen: PropTypes.bool,
+  setNavOpen: PropTypes.func
 }
 
 export default Navigation
