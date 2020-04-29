@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import sassVars from '../styles/principles/_variables.scss'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
@@ -21,16 +22,16 @@ export default ({ data }) => {
       <h1 className="main__header">Overview</h1>
       <div className="main__content">
         <div className="chart chart--bar">
-          <h2 className="text-centered">Overall Rates (Confirmed cases / hospitalized|icu|deaths)</h2>
+          <h2 className="text-centered">Overall Rates (compared to confirmed cases)</h2>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={pageData}>
               <CartesianGrid />
               <XAxis dataKey="dateReported" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="hospitalizedRate" className="chart--hospitalized" />
-              <Bar dataKey="icuRate" className="chart--icu" />
-              <Bar dataKey="deathRate" className="chart--deaths" />
+              <Bar dataKey="hospitalizedRate" name="Hospitalized" fill={sassVars.hospitalizedColor} />
+              <Bar dataKey="icuRate" name="ICU" fill={sassVars.icuColor} />
+              <Bar dataKey="deathRate" name="Deaths" fill={sassVars.deathsColor} />
             </BarChart>
           </ResponsiveContainer>
         </div>
