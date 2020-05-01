@@ -35,8 +35,8 @@ export default ({ pageContext, data }) => {
       <SEO title={pageContext.segment.title}/>
       <h1 className="main__header">{pageContext.segment.title}</h1>
 
-      <div className="main__content standard-page">
-        <div className="standard-page__charts">
+      <div className="main__content inner-grid">
+        <div>
           <DailyTotalChart
             segment={pageContext.segment}
             content={formattedData}
@@ -48,7 +48,7 @@ export default ({ pageContext, data }) => {
           />
         </div>
 
-        <div className="standard-page__scorecards">
+        <div>
           <h2 className="text-centered">Today</h2>
           <Scorecard
             title="Total Cases"
