@@ -29,9 +29,21 @@ export default ({ data }) => {
               <XAxis dataKey="dateReported" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="hospitalizedRate" name="Hospitalized" fill={sassVars.hospitalizedColor} />
-              <Bar dataKey="icuRate" name="ICU" fill={sassVars.icuColor} />
-              <Bar dataKey="deathRate" name="Deaths" fill={sassVars.deathsColor} />
+              <Bar
+                dataKey="hospitalizedRate"
+                name="Hospitalized"
+                fill={sassVars.hospitalizedColor}
+              />
+              <Bar
+                dataKey="icuRate"
+                name="ICU"
+                fill={sassVars.icuColor}
+              />
+              <Bar
+                dataKey="deathRate"
+                name="Deaths"
+                fill={sassVars.deathsColor}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>

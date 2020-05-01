@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 const Scorecard = ({ title, bigNumber, subtextValue, subtextFormatter, subtextComparison = false }) => {
   const subtext = subtextValue != null ? subtextValue : null

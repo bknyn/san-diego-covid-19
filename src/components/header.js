@@ -1,10 +1,10 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'gatsby'
 
 const Header = ({ siteTitle }) => (
   <header className="header">
-    <Link to="/" className="header__site-title">San Diego County COVID 19</Link>
+    <Link to="/" className="header__site-title">{siteTitle}</Link>
   </header>
 )
 
