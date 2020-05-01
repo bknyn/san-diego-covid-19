@@ -40,9 +40,14 @@ const Navigation = ({navOpen, setNavOpen}) => {
 
   return (
     <nav className="nav">
-      <button className="nav__mobile-toggle" onClick={() => setNavOpen(!navOpen)}>
+      {/* Hamburger button */}
+      <button
+        className="nav__mobile-toggle"
+        onClick={() => setNavOpen(!navOpen)}
+      >
         <span>&nbsp;</span>
       </button>
+
       <div className="nav__items">
         <Link to='/' className="nav__item">Overview</Link>
         {dynamicNavItems.map( (navItemData, index) => (
