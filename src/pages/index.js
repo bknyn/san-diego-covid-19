@@ -1,20 +1,23 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import sassVars from '../styles/principles/_variables.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
+import {
+  ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar
+} from 'recharts';
 
-import Layout from '../components/layout'
-import SEO from '../components/seo'
-import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar } from 'recharts'
+import Layout from '../components/layout';
+import SEO from '../components/seo';
+import sassVars from '../styles/principles/_variables.scss';
 
-export default ({ data }) => {
-  const pageData = data.allGoogleSpreadsheetRawData.edges.map(({node}) => {
-    return {
+const Index = ({ data: { allGoogleSpreadsheetRawData: { edges } } }) => {
+  const pageData = edges.map(({ node }) => (
+    {
       ...node,
       hospitalizedRate: ((node.hospitalized / node.confirmedCases) * 100).toFixed(2),
       icuRate: ((node.icu / node.confirmedCases) * 100).toFixed(2),
       deathRate: ((node.deaths / node.confirmedCases) * 100).toFixed(2)
     }
-  })
+  ));
 
   return (
     <Layout>
@@ -50,8 +53,8 @@ export default ({ data }) => {
       </div>
 
     </Layout>
-  )
-}
+  );
+};
 
 export const query = graphql`
   {
@@ -67,4 +70,24 @@ export const query = graphql`
       }
     }
   }
-`
+`;
+
+Index.propTypes = {
+  data: PropTypes.shape({
+    allGoogleSpreadsheetRawData: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+        PropTypes.shape({
+          node: PropTypes.shape({
+            confirmedCases: PropTypes.string.isRequired,
+            dateReported: PropTypes.string.isRequired,
+            deaths: PropTypes.string.isRequired,
+            hospitalized: PropTypes.string.isRequired,
+            icu: PropTypes.string.isRequired
+          })
+        })
+      )
+    })
+  }).isRequired
+};
+
+export default Index;

@@ -1,16 +1,20 @@
-import React from "react"
-import PropTypes from 'prop-types'
-import { CalculateMovingAverage } from '../utils/maths'
-import { ResponsiveContainer, ComposedChart, XAxis, YAxis, CartesianGrid, Bar, Line, Tooltip } from 'recharts'
-import sassVars from '../styles/principles/_variables.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  ResponsiveContainer, ComposedChart, XAxis, YAxis, CartesianGrid, Bar, Line, Tooltip
+} from 'recharts';
+import { CalculateMovingAverage } from '../utils/maths';
+import sassVars from '../styles/principles/_variables.scss';
 
 const DailyDeltaChart = ({ segment, content }) => {
-  const contentWithMovingAverages = content.map( (node, index, array) => {
-    return {
+  const contentWithMovingAverages = content.map((node, index, array) => (
+    {
       ...node,
       sevenDayMA: index >= 6 ? CalculateMovingAverage(array, index, 7) : null
     }
-  })
+  ));
+
+  const segmentColorVar = `${segment.camelCase}Color`;
 
   return (
     <div className="chart chart--combo">
@@ -18,13 +22,13 @@ const DailyDeltaChart = ({ segment, content }) => {
       <ResponsiveContainer width="100%" height={350}>
         <ComposedChart data={contentWithMovingAverages}>
           <XAxis dataKey="dateReported" />
-          <YAxis type="number" allowDataOverflow={true} />
+          <YAxis type="number" allowDataOverflow />
           <Tooltip />
           <CartesianGrid stroke="#f5f5f5" />
           <Bar
             dataKey="dailyDelta"
             name={segment.title}
-            fill={sassVars[segment.camelCase + 'Color']}
+            fill={sassVars[segmentColorVar]}
           />
           <Line
             type="monotone"
@@ -37,12 +41,27 @@ const DailyDeltaChart = ({ segment, content }) => {
         </ComposedChart>
       </ResponsiveContainer>
     </div>
-  )
-}
+  );
+};
 
 DailyDeltaChart.propTypes = {
-  segment: PropTypes.object,
-  content: PropTypes.array
-}
+  segment: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    camelCase: PropTypes.string.isRequired
+  }).isRequired,
+  content: PropTypes.arrayOf(
+    PropTypes.shape({
+      confirmedCases: PropTypes.string,
+      dailyDelta: PropTypes.number,
+      dataPoint: PropTypes.number,
+      dateReported: PropTypes.string,
+      deaths: PropTypes.string,
+      growthRate: PropTypes.string,
+      hospitalized: PropTypes.string,
+      icu: PropTypes.string
+    })
+  ).isRequired
+};
 
-export default DailyDeltaChart
+export default DailyDeltaChart;

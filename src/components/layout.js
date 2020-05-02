@@ -5,13 +5,13 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { useStaticQuery, graphql } from 'gatsby'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useStaticQuery, graphql } from 'gatsby';
 
-import '../styles/app.sass'
-import Header from './header'
-import Navigation from './navigation'
+import '../styles/app.sass';
+import Header from './header';
+import Navigation from './navigation';
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -22,9 +22,9 @@ const Layout = ({ children }) => {
         }
       }
     }
-  `)
+  `);
 
-  const [navOpen, setNavOpen] = useState(false)
+  const [navOpen, setNavOpen] = useState(false);
 
   return (
     <div className={`container ${navOpen ? 'nav--open' : 'nav--closed'}`}>
@@ -37,11 +37,11 @@ const Layout = ({ children }) => {
         <a href="https://www.gatsbyjs.org">Gatsby</a>
       </footer> */}
     </div>
-  )
-}
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Layout
+export default Layout;
