@@ -8,10 +8,10 @@
  * @return {number} The calculated moving average to 2 decimal points of precision
  */
 export const CalculateMovingAverage = (array, index, days) => {
-  const slicedArray = array.slice(index - (days - 1), index + 1)
-  const maValue = slicedArray.reduce((total, node) => total + node.dailyDelta, 0) / days
-  return maValue.toFixed(2)
-}
+  const slicedArray = array.slice(index - (days - 1), index + 1);
+  const maValue = slicedArray.reduce((total, node) => total + node.dailyDelta, 0) / days;
+  return maValue.toFixed(2);
+};
 
 /**
  * Caclulate the percent difference between two numbers
@@ -21,6 +21,6 @@ export const CalculateMovingAverage = (array, index, days) => {
  * @param {number=} precision - How many decimal points in the returned value
  * @return {number} The calculated percent difference
  */
-export const PercentDiff = (initial, current, precision = 2) => {
-  return (((current - initial) / initial) * 100).toFixed(precision);
-}
+export const PercentDiff = (initial, current, precision = 2) => (
+  (((current - initial) / initial) * 100).toFixed(precision)
+);
