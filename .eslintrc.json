@@ -22,6 +22,10 @@
     "plugins": [
         "react"
     ],
+    "ignorePatterns": [
+        "gatsby-config.js",
+        "gatsby-node.js"
+    ],
     "rules": {
         "react/jsx-filename-extension": [
             1,
