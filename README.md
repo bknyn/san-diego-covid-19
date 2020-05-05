@@ -39,7 +39,7 @@ There are a handful of Google Apps Scripts attached to the sheet to automate the
 
 Running the `Get updated data` function checks the last date reported row in the sheet and compares it with the data from the county's site. If there is newer data, it adds a row with the updated data.
 
-TODO:: add js with google scripts
+A copy of the scripts attached to the sheet can be found at the root of this project in `google-scripts.js`.
 
 ## Development
 

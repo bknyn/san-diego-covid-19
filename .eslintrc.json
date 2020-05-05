@@ -24,7 +24,8 @@
     ],
     "ignorePatterns": [
         "gatsby-config.js",
-        "gatsby-node.js"
+        "gatsby-node.js",
+        "google-scripts.js"
     ],
     "rules": {
         "react/jsx-filename-extension": [
