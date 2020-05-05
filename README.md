@@ -1,99 +1,72 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's default starter
-</h1>
+# San Diego County COVID 19
+A basic [Gatsby](https://www.gatsbyjs.org)-generated site for quick visualization of the daily COVID 19 data published on the [San Diego County site](https://www.sandiegocounty.gov/content/sdc/hhsa/programs/phs/community_epidemiology/dc/2019-nCoV/status.html)
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+## Project Setup
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+Initially, this project was started with [Gatsby's default starter](https://github.com/gatsbyjs/gatsby-starter-default) (still some unused remnants lying around in this codebase, in fact). When in doubt, the [Gatsby documentation](https://www.gatsbyjs.org/docs/) is a great place to start.
 
-## 🚀 Quick start
+### Requirements
+- Node (at the time of writing: `v13.12.0`)
+- NPM or Yarn (at the time of writing: `NPM 6.14.4`)
+- Access to the Google Sheet referenced in the config or a correctly structured sheet (see Data below)
+- Google Drive service account from [Google API Console](https://console.developers.google.com/). (A bit out of date but follow first part of [this tutorial](https://www.twilio.com/blog/2017/03/google-spreadsheets-and-javascriptnode-js.html))
 
-1.  **Create a Gatsby site.**
+### Installing and Running
+1. After cloning and `cd`-ing into the project's directory, run `npm install` to install the node modules.
+2. Create `.env` file at the root of the project with the key `GOOGLE_AUTH_COVID_19`. That key should point to a base-64 encoded string of the `client_secret.json` recieved from getting Google Drive API access.
+3. Run either `gatsby develop` or `npm run develop` to start the local server.
+4. Site should now be accessible at [localhost:8000](http://localhost:8000).
 
-    Use the Gatsby CLI to create a new site, specifying the default starter.
+## Data
 
-    ```shell
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+### Source and structure
 
-1.  **Start developing.**
+The data from the county site is collected daily and stored in a Google Sheet. The Google Sheet then acts as a database for this project to consume. The structure of the sheet:
 
-    Navigate into your new site’s directory and start it up.
+| Date reported | Confirmed Cases | Hospitalized | ICU | Deaths |
+| ------------- | --------------- | ------------ | --- | ------ |
+| ...           | ...             | ...          | ... | ...    |
+| 4/14/2020     | 1930            | 450          | 164 | 53     |
+| 4/15/2020     | 2012            | 488          | 173 | 60     |
+| 4/16/2020     | 2087            | 507          | 181 | 63     |
+| ...           | ...             | ...          | ... | ...    |
 
-    ```shell
-    cd my-default-starter/
-    gatsby develop
-    ```
+### Updating the data
 
-1.  **Open the source code and start editing!**
+There are a handful of Google Apps Scripts attached to the sheet to automate the data updates. The main update function has been added to the menu on the sheet: `External Functions` -> `Get updated data`.
 
-    Your site is now running at `http://localhost:8000`!
+Running the `Get updated data` function checks the last date reported row in the sheet and compares it with the data from the county's site. If there is newer data, it adds a row with the updated data.
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+TODO:: add js with google scripts
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+## Development
 
-## 🧐 What's inside?
+Run `gatsby develop` or `npm run develop` to run the local Gatsby dev server. Visit the local site and updates to the code should be reflected in the browser via HMR (unless a server restart is needed, obviously). The dev process is fairly standard for Gatsby; check the [docs](https://www.gatsbyjs.org/docs/) for more info.
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+There are two areas that deviate from Gatsby defaults & typical setup: stylesheets and js linting.
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
+### Stylesheets
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+The stylesheets are all stored in the `src/styles` directory. The organization of the style partials is based on ITCSS principles (with naming inspired by [GE's Predix Design System](https://medium.com/ge-design/ges-predix-design-system-8236d47b0891)). The individual partials are imported into the manifest file `app.sass`.
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+`app.sass` is imported into the main layout component (`src/components/layout.js`), which means that all of the styles are available on every page. For this small-sized project, it's not an issue, but this isn't a pattern that scales well. So consider converting to modules and importing as needed if development continues.
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+### JS linting
 
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+This project is set up with eslint using _(mostly)_ Airbnb's Javascript style guide. The default Gatsby starter and Airbnb disagree on quite a few conventions (like semi-colons and quote marks, for instance).
 
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+The primary deviation from Airbnb's style guide regards trailing commas. The Airbnb guide requires trailing commas. On this project, per rules in `.eslintrc.json`, trailing commas are _allowed_ on multiline properties, but _never_ required.
 
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
+The custom eslint should automatically run as part of the develop script (via `gatsby-plugin-eslint`). And the default `.prettierrc` file has been lightly retouched to agree with Airbnb.
 
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+## Build
 
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.org/docs/ssr-apis/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+Run `gatsby build` to build a local version of what will be produced when deploying. Useful if you want to check the output of the build, but this is rarely done locally. The `public/` directory it creates is excluded from git.
 
-9.  **`LICENSE`**: Gatsby is licensed under the MIT license.
+## Deploy
 
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+The site is hosted with [Netlify](https://www.netlify.com/). Netlify has access to the repo and, on deploy, automatically runs the build and deploys the production version of the site.
 
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
-
-12. **`README.md`**: A text file containing useful reference information about your project.
-
-## 🎓 Learning Gatsby
-
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
-
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-default)
-
-[![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/import/project?template=https://github.com/gatsbyjs/gatsby-starter-default)
-
-<!-- AUTO-GENERATED-CONTENT:END -->
+A deploy is triggered when:
+- there is a commit to the master branch in Github
+- the `Deploy Site` command is run from the Google Sheet (which simply pings a webhook)
