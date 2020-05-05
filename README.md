@@ -1,6 +1,8 @@
 # San Diego County COVID 19
 A basic [Gatsby](https://www.gatsbyjs.org)-generated site for quick visualization of the daily COVID 19 data published on the [San Diego County site](https://www.sandiegocounty.gov/content/sdc/hhsa/programs/phs/community_epidemiology/dc/2019-nCoV/status.html)
 
+![](screenshot-lg.png)
+
 ## Project Setup
 
 Initially, this project was started with [Gatsby's default starter](https://github.com/gatsbyjs/gatsby-starter-default) (still some unused remnants lying around in this codebase, in fact). When in doubt, the [Gatsby documentation](https://www.gatsbyjs.org/docs/) is a great place to start.
