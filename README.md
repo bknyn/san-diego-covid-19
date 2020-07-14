@@ -21,6 +21,10 @@ Initially, this project was started with [Gatsby's default starter](https://gith
 
 ## Data
 
+### The data for this project is no longer being updated
+
+Leaving this here for reference, but the spreadsheet with the data is no longer being updated.
+
 ### Source and structure
 
 The data from the county site is collected daily and stored in a Google Sheet. The Google Sheet then acts as a database for this project to consume. The structure of the sheet:
